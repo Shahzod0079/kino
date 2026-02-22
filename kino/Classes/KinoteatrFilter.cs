@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace kino.Classes
 {
-    internal class KinoteatrFilter
+    public class KinoteatrFilter
     {
+        public string Name { get; set; }           
+        public int? MinCountZal { get; set; }   
+        public int? MaxCountZal { get; set; }        
+        public int? MinCount { get; set; }           
+        public int? MaxCount { get; set; }             
     }
 }
