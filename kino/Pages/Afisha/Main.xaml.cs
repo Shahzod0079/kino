@@ -1,39 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using kino.Classes;
 
 namespace kino.Pages.Afisha
 {
-    /// <summary>
-    /// Логика взаимодействия для Main.xaml
-    /// </summary>
     public partial class Main : Page
     {
-        List<AfishaContext> AllAfishas = AfishaContext.Select();
+        List<AfishaContext> AllAfishas;
+        List<KinoteatrContext> AllKinoteatrs;
 
         public Main()
         {
             InitializeComponent();
+            LoadData();
+            LoadKinoteatrs();
+        }
 
-            foreach (AfishaContext item in AllAfishas)
+        private void LoadData()
+        {
+            AllAfishas = AfishaContext.Select();
+            DisplayAfishas(AllAfishas);
+        }
+
+        private void LoadKinoteatrs()
+        {
+            AllKinoteatrs = KinoteatrContext.Select();
+            cmbKinoteatr.ItemsSource = AllKinoteatrs;
+            cmbKinoteatr.DisplayMemberPath = "Name";
+            cmbKinoteatr.SelectedValuePath = "Id";
+            cmbKinoteatr.SelectedIndex = -1; 
+        }
+
+        private void DisplayAfishas(List<AfishaContext> afishas)
+        {
+            parent.Children.Clear();
+            foreach (AfishaContext item in afishas)
             {
                 parent.Children.Add(new Items.Item(item, this));
             }
         }
 
-        private void AddRecord(object sender, System.Windows.RoutedEventArgs e) =>
-            MainWindow.init.OpenPage(new Pages.Afisha.Add());
+        private void ApplyFilter(object sender, RoutedEventArgs e)
+        {
+            List<AfishaContext> filteredList = new List<AfishaContext>();
+
+            foreach (AfishaContext a in AllAfishas)
+            {
+                bool matches = true;
+
+                if (!string.IsNullOrWhiteSpace(txtName.Text))
+                    if (!a.Name.ToLower().Contains(txtName.Text.ToLower()))
+                        matches = false;
+
+                if (matches && cmbKinoteatr.SelectedItem != null)
+                {
+                    var selectedKinoteatr = cmbKinoteatr.SelectedItem as KinoteatrContext;
+                    if (a.IdKinoteatr != selectedKinoteatr.Id)
+                        matches = false;
+                }
+
+                if (matches && dpDateFrom.SelectedDate.HasValue)
+                    if (a.Time.Date < dpDateFrom.SelectedDate.Value.Date)
+                        matches = false;
+
+                if (matches && dpDateTo.SelectedDate.HasValue)
+                    if (a.Time.Date > dpDateTo.SelectedDate.Value.Date)
+                        matches = false;
+
+                if (matches && int.TryParse(txtPriceFrom.Text, out int priceFrom))
+                    if (a.Price < priceFrom)
+                        matches = false;
+
+                if (matches && int.TryParse(txtPriceTo.Text, out int priceTo))
+                    if (a.Price > priceTo)
+                        matches = false;
+
+                if (matches)
+                    filteredList.Add(a);
+            }
+
+            DisplayAfishas(filteredList);
+        }
+
+        private void ClearFilter(object sender, RoutedEventArgs e)
+        {
+            txtName.Text = "";
+            cmbKinoteatr.SelectedIndex = -1;
+            dpDateFrom.SelectedDate = null;
+            dpDateTo.SelectedDate = null;
+            txtPriceFrom.Text = "";
+            txtPriceTo.Text = "";
+
+            DisplayAfishas(AllAfishas);
+        }
+
+        private void AddRecord(object sender, RoutedEventArgs e)
+        {
+            MainWindow.init.OpenPage(new Add());
+        }
+
+        public void RefreshData()
+        {
+            LoadData();
+        }
     }
 }

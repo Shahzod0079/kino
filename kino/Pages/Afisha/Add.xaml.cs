@@ -29,13 +29,11 @@ namespace kino.Pages.Afisha
 
             this.afisha = afisha;
 
-            // Заполняем поля данными
             name.Text = afisha.Name;
             date.SelectedDate = afisha.Time;
             time.Text = afisha.Time.ToString("HH:mm");
             price.Text = afisha.Price.ToString();
 
-            // Выбираем нужный кинотеатр
             foreach (var k in AllKinoteatrs)
             {
                 if (k.Id == afisha.IdKinoteatr)
@@ -89,7 +87,7 @@ namespace kino.Pages.Afisha
 
             if (afisha == null)
             {
-                // Добавление
+
                 AfishaContext newAfisha = new AfishaContext(
                     0,
                     selectedKinoteatr.Id,
@@ -101,7 +99,6 @@ namespace kino.Pages.Afisha
             }
             else
             {
-                // Обновление
                 afisha = new AfishaContext(
                     afisha.Id,
                     selectedKinoteatr.Id,
@@ -113,6 +110,13 @@ namespace kino.Pages.Afisha
             }
 
             MainWindow.init.OpenPage(new Pages.Afisha.Main());
+
+
+            if (MainWindow.init.frame.Content is Main mainPage)
+            {
+                mainPage.RefreshData();
+                MainWindow.init.frame.NavigationService.GoBack();
+            }
         }
     }
 }
