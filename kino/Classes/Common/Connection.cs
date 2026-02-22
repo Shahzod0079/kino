@@ -10,7 +10,7 @@ namespace kino.Classes.Common
 {
     public class Connection
     {
-        public static readonly string config = "server=10.0.204.1;uid=root;pwd=;database=kino;";
+        public static readonly string config = "server=127.0.0.1;uid=root;pwd=;database=kino;";
 
         public static MySqlConnection OpenConnection()
         {

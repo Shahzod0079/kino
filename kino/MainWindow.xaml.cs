@@ -20,9 +20,27 @@ namespace kino
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public static MainWindow init;
+
+            public MainWindow()
+            {
+                InitializeComponent();
+                OpenPage(new Pages.Afisha.Main());
+                init = this;
+            }
+
+            public void OpenPage(Page Page)
+            {
+                frame.Navigate(Page);
+            }
+
+            private void OpenKino(object sender, RoutedEventArgs e) => OpenPage(new Pages.Kinoteatr.Main());
+
+            private void OpenAfisha(object sender, RoutedEventArgs e) => OpenPage(new Pages.Afisha.Main());
+
+        private void frame_Navigated(object sender, NavigationEventArgs e)
         {
-            InitializeComponent();
+
         }
     }
-}
+    }

@@ -16,7 +16,7 @@ namespace kino.Classes
         public static List<KinoteatrContext> Select()
         {
             List<KinoteatrContext> AllKinoteatrs = new List<KinoteatrContext>();
-            string SQL = "SELECT * FROM `kinoteatr`";
+            string SQL = "SELECT * FROM `Kinoteatr`";
 
             MySqlConnection connection = Connection.OpenConnection();
             MySqlDataReader Data = Connection.Query(SQL, connection);

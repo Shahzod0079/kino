@@ -39,14 +39,14 @@ namespace kino.Classes
         {
             string SQL = "INSERT INTO " +
             "afisha(" +
-            "id_kinoteatr, " +
+            "id_kinotetatr, " +
             "name, " +
             "time, " +
             "price) " +
             "VALUES (" +
             $"'{this.IdKinoteatr}', " +
             $"'{this.Name}', " +
-            $"'{this.Time:yyyy-MM-dd HH:mm:ss}', " +
+            $"'{this.Time.ToString("yyyy-MM-dd HH:mm:ss")}', " +
             $"'{this.Price}')";
 
             MySqlConnection connection = Connection.OpenConnection();
@@ -58,9 +58,9 @@ namespace kino.Classes
             string SQL = "UPDATE " +
             "afisha " +
             "SET " +
-            $"id_kinoteatr='{this.IdKinoteatr}', " +
+            $"id_kinotetatr='{this.IdKinoteatr}', " +
             $"name='{this.Name}', " +
-            $"time='{this.Time:yyyy-MM-dd HH:mm:ss}', " +
+            $"time='{this.Time.ToString("yyyy-MM-dd HH:mm:ss")}', " +
             $"price='{this.Price}' " +
             "WHERE " +
             $"id='{this.Id}'";
