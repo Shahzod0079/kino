@@ -24,24 +24,35 @@ namespace kino.Pages.Kinoteatr.Items
         KinoteatrContext Kinoteatr;
         Main main;
 
-        public Item(KinoteatrContext Kinoteatr, Main main)
+        public Item(KinoteatrContext kinoteatr, Main main = null)
         {
             InitializeComponent();
 
-            name.Text = Kinoteatr.Name;
-            countZal.Text = Kinoteatr.CountZal.ToString();
-            Count.Text = Kinoteatr.Count.ToString();
-            this.Kinoteatr = Kinoteatr;
+            name.Text = kinoteatr.Name;
+            countZal.Text = kinoteatr.CountZal.ToString();
+            Count.Text = kinoteatr.Count.ToString();
+
+            this.Kinoteatr = kinoteatr;
             this.main = main;
         }
 
-        private void EditRecord(object sender, System.Windows.RoutedEventArgs e) =>
+        private void EditRecord(object sender, System.Windows.RoutedEventArgs e)
+        {
             MainWindow.init.OpenPage(new Pages.Kinoteatr.Add(this.Kinoteatr));
+        }
 
         private void DeleteRecord(object sender, System.Windows.RoutedEventArgs e)
         {
             Kinoteatr.Delete();
-            main.parent.Children.Remove(this);
+
+            if (main != null)
+            {
+                main.parent.Children.Remove(this);
+            }
+            else
+            {
+                MainWindow.init.OpenPage(new Pages.Kinoteatr.Main());
+            }
         }
     }
 }

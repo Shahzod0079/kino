@@ -13,6 +13,46 @@ namespace kino.Classes
     {
         public KinoteatrContext(int Id, string Name, int CountZal, int Count) : base(Id, Name, CountZal, Count) { }
 
+
+        public static List<KinoteatrContext> SelectWithFilter(KinoteatrFilter filter)
+        {
+            List<KinoteatrContext> AllKinoteatrs = new List<KinoteatrContext>();
+            string SQL = "SELECT * FROM `kinoteatr` WHERE 1=1";
+
+            if (filter != null)
+            {
+                if (!string.IsNullOrWhiteSpace(filter.Name))
+                    SQL += $" AND name LIKE '%{filter.Name}%'";
+
+                if (filter.MinCountZal.HasValue)
+                    SQL += $" AND count_zal >= {filter.MinCountZal}";
+
+                if (filter.MaxCountZal.HasValue)
+                    SQL += $" AND count_zal <= {filter.MaxCountZal}";
+
+                if (filter.MinCount.HasValue)
+                    SQL += $" AND count >= {filter.MinCount}";
+
+                if (filter.MaxCount.HasValue)
+                    SQL += $" AND count <= {filter.MaxCount}";
+            }
+
+            MySqlConnection connection = Connection.OpenConnection();
+            MySqlDataReader Data = Connection.Query(SQL, connection);
+
+            while (Data.Read())
+            {
+                AllKinoteatrs.Add(new KinoteatrContext(
+                    Data.GetInt32(0),
+                    Data.GetString(1),
+                    Data.GetInt32(2),
+                    Data.GetInt32(3)
+                ));
+            }
+
+            Connection.CloseConnection(connection);
+            return AllKinoteatrs;
+        }
         public static List<KinoteatrContext> Select()
         {
             List<KinoteatrContext> AllKinoteatrs = new List<KinoteatrContext>();
