@@ -142,7 +142,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Kinoteatr\Filter.xaml.xaml">
+    <Page Include="Pages\Kinoteatr\Filter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,8 +173,8 @@
     <Compile Include="Pages\Kinoteatr\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Kinoteatr\Filter.xaml.xaml.cs">
-      <DependentUpon>Filter.xaml.xaml</DependentUpon>
+    <Compile Include="Pages\Kinoteatr\Filter.xaml.cs">
+      <DependentUpon>Filter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Kinoteatr\Items\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>

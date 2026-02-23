@@ -24,11 +24,11 @@ namespace kino.Classes
             while (Data.Read())
             {
                 AllAfishas.Add(new AfishaContext(
-                    Data.GetInt32(0),     // id
-                    Data.GetInt32(4),     // id_kinoteatr (это 4-й индекс!)
-                    Data.GetString(1),    // name
-                    Data.GetDateTime(2),  // time  
-                    Data.GetInt32(3)      // price
+                    Data.GetInt32(0), 
+                    Data.GetInt32(4),     
+                    Data.GetString(1),    
+                    Data.GetDateTime(2),  
+                    Data.GetInt32(3)    
                 ));
             }
 

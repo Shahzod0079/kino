@@ -1,33 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using kino.Classes;
 
 namespace kino.Pages.Afisha
 {
-    /// <summary>
-    /// Логика взаимодействия для BuyTicket.xaml
-    /// </summary>
     public partial class BuyTicket : Page
     {
-        public BuyTicket(object afisha)
+        AfishaContext selectedFilm;
+
+        public BuyTicket(AfishaContext film)
         {
             InitializeComponent();
+            selectedFilm = film;
+
+            txtFilm.Text = film.Name;
+            txtKinoteatr.Text = GetKinoteatrName(film.IdKinoteatr);
+            txtDateTime.Text = film.Time.ToString("dd.MM.yyyy HH:mm");
+            txtPrice.Text = film.Price.ToString();
+
+            for (int i = 1; i <= 30; i++)
+            {
+                cmbSeat.Items.Add(i);
+            }
+            cmbSeat.SelectedIndex = 0;
         }
 
+        private string GetKinoteatrName(int id)
+        {
+            var kinoteatr = KinoteatrContext.Select().FirstOrDefault(k => k.Id == id);
+            return kinoteatr != null ? kinoteatr.Name : "Неизвестный кинотеатр";
+        }
         private void BuyTicket_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Билет куплен!");
+            if (string.IsNullOrWhiteSpace(txtClientName.Text))
+            {
+                MessageBox.Show("Введите имя покупателя!");
+                return;
+            }
+
+            if (cmbSeat.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите место!");
+                return;
+            }
+
+            TicketContext newTicket = new TicketContext(
+                0,  
+                selectedFilm.Id,
+                txtClientName.Text,
+                (int)cmbSeat.SelectedItem,
+                DateTime.Now,
+                selectedFilm.Price,
+                true
+            );
+
+            newTicket.Add();
+
+            MessageBox.Show("Билет успешно сохранен!");
+            MainWindow.init.OpenPage(new Main());
         }
     }
 }

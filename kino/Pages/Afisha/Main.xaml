@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:kino.Pages.Afisha"
       xmlns:items="clr-namespace:kino.Pages.Afisha.Items"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Main" Background="White">
+      d:DesignHeight="450"
+      Title="Main" Background="White" Width="816">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -45,13 +45,13 @@
                 <Label Grid.Row="1" Grid.Column="0" Content="Дата от:" VerticalAlignment="Center"/>
                 <DatePicker x:Name="dpDateFrom" Grid.Row="1" Grid.Column="1" Margin="5" Height="25"/>
 
-                <Label Grid.Row="1" Grid.Column="2" Content="до:" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpDateTo" Grid.Row="1" Grid.Column="3" Margin="5" Height="25"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="до:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="120,0,52,0"/>
+                <DatePicker x:Name="dpDateTo" Grid.Row="1" Grid.Column="2" Margin="45,5,114,5" Height="25" Grid.ColumnSpan="2"/>
 
-                <Label Grid.Row="1" Grid.Column="4" Content="Цена от:" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtPriceFrom" Grid.Row="1" Grid.Column="5" Margin="5" Height="25"/>
+                <Label Grid.Row="1" Grid.Column="3" Content="Цена от:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="101,0,19,0"/>
+                <TextBox x:Name="txtPriceFrom" Grid.Row="1" Grid.Column="3" Margin="165,5,36,5" Height="25" Grid.ColumnSpan="3"/>
 
-                <Label Grid.Row="1" Grid.Column="6" Content="до:" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="5" Content="до:" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="70,0,10,0"/>
                 <TextBox x:Name="txtPriceTo" Grid.Row="1" Grid.Column="7" Margin="5" Height="25"/>
 
                 <Button x:Name="btnApply" Grid.Row="1" Grid.Column="8" Content="Применить" 

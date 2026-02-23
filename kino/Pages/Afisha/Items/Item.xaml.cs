@@ -67,7 +67,7 @@ namespace kino.Pages.Afisha.Items
 
         private void BuyTicket(object sender, RoutedEventArgs e)
         {
-            MainWindow.init.OpenPage(new Pages.Afisha.BuyTicket(this.Afisha));
+            MainWindow.init.OpenPage(new Pages.Afisha.BuyTicket(this.item));
         }
     }
 }

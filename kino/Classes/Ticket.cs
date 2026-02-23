@@ -12,10 +12,8 @@ namespace kino.Classes
         public decimal Price { get; set; }
         public bool IsSold { get; set; }
 
-        // Конструктор без параметров
         public Ticket() { }
 
-        // Конструктор с параметрами
         public Ticket(int id, int idAfisha, string clientName, int seatNumber,
                      DateTime purchaseDate, decimal price, bool isSold)
         {
