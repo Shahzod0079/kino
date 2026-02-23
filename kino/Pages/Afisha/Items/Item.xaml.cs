@@ -26,15 +26,27 @@ namespace kino.Pages.Afisha.Items
         AfishaContext item;
         Main main;
 
+        public object Afisha { get; private set; }
+
         public Item(AfishaContext item, Main main)
         {
             InitializeComponent();
 
-            kinoteatrs.Text = AllKinoteatrs.Find(x => x.Id == item.IdKinoteatr).Name;
+            var foundKinoteatr = AllKinoteatrs.FirstOrDefault(x => x.Id == item.IdKinoteatr);
+            if (foundKinoteatr != null)
+            {
+                kinoteatrs.Text = foundKinoteatr.Name;
+            }
+            else
+            {
+                kinoteatrs.Text = "Кинотеатр не найден";
+            }
+
             name.Text = item.Name;
             date.Text = item.Time.ToString("yyyy-MM-dd");
             time.Text = item.Time.ToString("HH:mm");
             price.Text = item.Price.ToString();
+
             this.item = item;
             this.main = main;
         }
@@ -51,6 +63,11 @@ namespace kino.Pages.Afisha.Items
         private void AddRecord(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BuyTicket(object sender, RoutedEventArgs e)
+        {
+            MainWindow.init.OpenPage(new Pages.Afisha.BuyTicket(this.Afisha));
         }
     }
 }

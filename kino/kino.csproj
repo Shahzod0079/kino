@@ -116,11 +116,17 @@
     <Compile Include="Classes\Common\Connection.cs" />
     <Compile Include="Classes\KinoteatrContext.cs" />
     <Compile Include="Classes\KinoteatrFilter.cs" />
+    <Compile Include="Classes\Ticket.cs" />
+    <Compile Include="Classes\TicketContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Afisha\Add.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Afisha\BuyTicket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +160,9 @@
     <Compile Include="Modell\Kinoteatr.cs" />
     <Compile Include="Pages\Afisha\Add.xaml.cs">
       <DependentUpon>Add.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Afisha\BuyTicket.xaml.cs">
+      <DependentUpon>BuyTicket.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Afisha\Items\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>

@@ -24,11 +24,11 @@ namespace kino.Classes
             while (Data.Read())
             {
                 AllAfishas.Add(new AfishaContext(
-                    Data.GetInt32(0),
-                    Data.GetInt32(1),
-                    Data.GetString(2),
-                    Data.GetDateTime(3),
-                    Data.GetInt32(4)
+                    Data.GetInt32(0),     // id
+                    Data.GetInt32(4),     // id_kinoteatr (это 4-й индекс!)
+                    Data.GetString(1),    // name
+                    Data.GetDateTime(2),  // time  
+                    Data.GetInt32(3)      // price
                 ));
             }
 
@@ -39,7 +39,7 @@ namespace kino.Classes
         {
             string SQL = "INSERT INTO " +
             "afisha(" +
-            "id_kinotetatr, " +
+            "id_kinoteatr, " +
             "name, " +
             "time, " +
             "price) " +
@@ -58,7 +58,7 @@ namespace kino.Classes
             string SQL = "UPDATE " +
             "afisha " +
             "SET " +
-            $"id_kinotetatr='{this.IdKinoteatr}', " +
+            $"id_kinoteatr='{this.IdKinoteatr}', " +
             $"name='{this.Name}', " +
             $"time='{this.Time.ToString("yyyy-MM-dd HH:mm:ss")}', " +
             $"price='{this.Price}' " +

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using kino.Classes;
@@ -20,6 +21,7 @@ namespace kino.Pages.Afisha
             btnAdd.Content = "Добавить";
         }
 
+        // В конструкторе Add(AfishaContext afisha)
         public Add(AfishaContext afisha)
         {
             InitializeComponent();
@@ -29,22 +31,22 @@ namespace kino.Pages.Afisha
 
             this.afisha = afisha;
 
+            // Заполняем поля
             name.Text = afisha.Name;
             date.SelectedDate = afisha.Time;
             time.Text = afisha.Time.ToString("HH:mm");
             price.Text = afisha.Price.ToString();
 
-            foreach (var k in AllKinoteatrs)
+            // ВЫБИРАЕМ КИНОТЕАТР В КОМБОБОКСЕ (ИСПРАВЛЕНО)
+            var selectedKinoteatr = AllKinoteatrs.FirstOrDefault(x => x.Id == afisha.IdKinoteatr);
+            if (selectedKinoteatr != null)
             {
-                if (k.Id == afisha.IdKinoteatr)
-                {
-                    kinoteatrs.SelectedItem = k;
-                    break;
-                }
+                kinoteatrs.SelectedItem = selectedKinoteatr;  // .SelectedItem, а не .Text!
             }
 
             btnAdd.Content = "Изменить";
         }
+
 
         private void AddRecord(object sender, RoutedEventArgs e)
         {

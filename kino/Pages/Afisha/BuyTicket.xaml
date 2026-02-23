@@ -1,0 +1,43 @@
+﻿<Page x:Class="kino.Pages.Afisha.BuyTicket"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Buy Ticket">
+
+    <Grid Margin="20" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Оформление билета" FontSize="20" Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,20">
+            <TextBlock Text="Фильм: " FontWeight="Bold"/>
+            <TextBlock x:Name="txtFilm" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Кинотеатр: " FontWeight="Bold"/>
+            <TextBlock x:Name="txtKinoteatr" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Дата и время: " FontWeight="Bold"/>
+            <TextBlock x:Name="txtDateTime" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Цена: " FontWeight="Bold"/>
+            <TextBlock x:Name="txtPrice" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="2" Header="Данные покупателя" Margin="0,0,0,20">
+            <StackPanel>
+                <Label Content="Ваше имя:"/>
+                <TextBox x:Name="txtClientName" Margin="0,0,0,10" Height="25"/>
+
+                <Label Content="Номер места:"/>
+                <ComboBox x:Name="cmbSeat" Margin="0,0,0,10" Height="25"/>
+            </StackPanel>
+        </GroupBox>
+
+        <Button Grid.Row="2" Content="Купить билет" Click="BuyTicket_Click" 
+                Height="35" Background="#FF73E618" Width="150" HorizontalAlignment="Center" Margin="0,165,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+    </Grid>
+</Page>
